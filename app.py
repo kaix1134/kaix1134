@@ -149,21 +149,21 @@ def update_graph(drop_month, drop_year):
 
 @dash_app.callback(
     Output('sales_product', 'figure'),  
-    [Input('drop_month1', 'value'),
-    Input('drop_year1', 'value')]
+    [Input('drop_month2', 'value'),
+    Input('drop_year2', 'value')]
 )
-def update_graph1(drop_month1, drop_year1):
+def update_graph2(drop_month2, drop_year2):
 
-    if drop_year1:
-        if drop_month1:
-            order_fig2 = order2.loc[(order2['orderyear'] == drop_year1) & (order2['ordermonth'] == drop_month1)]
+    if drop_year2:
+        if drop_month2:
+            order_fig2 = order2.loc[(order2['orderyear'] == drop_year2) & (order2['ordermonth'] == drop_month2)]
             
         else:
-            order_fig2 = order2.loc[order2['orderyear'] == drop_year1]
+            order_fig2 = order2.loc[order2['orderyear'] == drop_year2]
             
     else:
-        if drop_month1:
-            order_fig2 = order2.loc[order2['ordermonth'] == drop_month1]
+        if drop_month2:
+            order_fig2 = order2.loc[order2['ordermonth'] == drop_month2]
             
         else:
             order_fig2 = order2
