@@ -14,7 +14,6 @@ import datamodel
 # ***************************************
 
 order = datamodel.get_data()
-order2 = datamodel.get_data()
 df_year = datamodel.get_year()
 df_month = datamodel.get_month()
 
@@ -34,7 +33,7 @@ fig_employee.update_layout(uniformtext_minsize=8, uniformtext_mode='hide', xaxis
 # create figure 2 - sales by product
 # ***************************************
 
-fig_product = px.bar(order2, 
+fig_product = px.bar(order,
     x='productname', y='total', 
     color='type', text='total', title='Sales by Product',
     hover_data=[],
@@ -83,7 +82,6 @@ dash_app.layout = html.Div(
                     ),
                 ]
             ),
-
         html.Div(className='row',
                 children=[
                     html.Div(className='four columns div-user-controls',
@@ -112,9 +110,8 @@ dash_app.layout = html.Div(
                     ),
                 ]
             )
-        ]
+    ]
 )
-
 
 # ***************************************
 # callbacks
@@ -125,7 +122,6 @@ dash_app.layout = html.Div(
     [Input('drop_month', 'value'),
     Input('drop_year', 'value')],
 )
-
 def update_graph(drop_month, drop_year):
     if drop_year:
         if drop_month:
@@ -155,17 +151,17 @@ def update_graph2(drop_month2, drop_year2):
 
     if drop_year2:
         if drop_month2:
-            order_fig2 = order2.loc[(order2['orderyear'] == drop_year2) & (order2['ordermonth'] == drop_month2)]
+            order_fig2 = order.loc[(order['orderyear'] == drop_year2) & (order['ordermonth'] == drop_month2)]
             
         else:
-            order_fig2 = order2.loc[order2['orderyear'] == drop_year2]
+            order_fig2 = order.loc[order['orderyear'] == drop_year2]
             
     else:
         if drop_month2:
-            order_fig2 = order2.loc[order2['ordermonth'] == drop_month2]
+            order_fig2 = order.loc[order['ordermonth'] == drop_month2]
             
         else:
-            order_fig2 = order2
+            order_fig2 = order
         
     return {'data':[go.Bar(
         x = order_fig2['productname'],
